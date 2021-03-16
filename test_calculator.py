@@ -39,21 +39,16 @@ class TestStringMethods(unittest.TestCase):
         result = calc.calculator(inp)
 
         self.assertEqual(ssum,result)
-    
-    def test6(self):
+        
+    def test5(self):
         ssum = 150
         inp = '30\n70,50'
 
         result = calc.calculator(inp)
 
         self.assertEqual(ssum,result)
-        def test5(self):
-        ssum = 150
-        inp = '30\n70,50'
 
-        result = calc.calculator(inp)
-
-        self.assertEqual(ssum,result)
+        
 if __name__ == '__main__': 
     unittest.main() 
 
