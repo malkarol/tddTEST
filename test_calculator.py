@@ -3,51 +3,89 @@ import unittest
 #An empty string returns zero
 
 class TestStringMethods(unittest.TestCase): 
-    def test_calculator(self):
-    
-        #Given
-        input_number = ""
+    def testEmptyString(self):
+        input_string = ""
         expected_result = 0
-        #When
-        result = calc.calculator(input_number)
-    
-        #Then
+
+        result = calc.calculate(input_string)
+
         self.assertEqual(expected_result,result)
-    def test2(self):
-        input_number1 = '100'
-        exp = 100
 
-        result=calc.calculator(input_number1)
+    def testSingleNumber(self):
+        input_string = '100'
+        expected_result = 100
 
-        self.assertEqual(exp,result)
+        result=calc.calculate(input_string)
 
-    def test3(self):
-        ssum = 100
-        inp = '30,70'
+        self.assertEqual(expected_result,result)
 
-        first_number = 60
-        second_number = 40
+    def testCommaSepNumbers(self):
+        input_string = '30,70'
+        expected_result = 100
 
-        result = calc.calculator(inp)
+        result = calc.calculate(input_string)
 
-        self.assertEqual(ssum,result)
+        self.assertEqual(expected_result,result)
     
-    def test4(self):
-        ssum = 100
-        inp = '30\n70'
+    def testNewLSepNumbers(self):
+        input_string = '30\n70'
+        expected_result = 100
 
-        result = calc.calculator(inp)
+        result = calc.calculate(input_string)
 
-        self.assertEqual(ssum,result)
+        self.assertEqual(expected_result, result)
+
+    def testThreeNumsSep(self):
+        input_string = '30\n70,50'
+        expected_result = 150
+
+        result = calc.calculate(input_string)
+
+        self.assertEqual(expected_result, result)
+
+
+    def testNegativeNum(self):
+        input_string = '-100'
+        expected_result = ValueError
         
-    def test5(self):
-        ssum = 150
-        inp = '30\n70,50'
+        result = calc.calculate(input_string)
 
-        result = calc.calculator(inp)
+        self.assertEqual(expected_result, type(result))
 
-        self.assertEqual(ssum,result)
 
+    def testNumOverflow(self):
+        input_string = '1200'
+        expected_result = 0
+
+        result = calc.calculate(input_string)
+
+        self.assertEqual(result, expected_result)
+
+    def testCustomSep(self):
+        input_string = '//#\n120,30#50'
+        expected_result = 200
+
+        result = calc.calculate(input_string)
+
+        self.assertEqual(result, expected_result)
+
+    def testCustomSingleSep(self):
+        input_string = '//[#]\n150\n20#30'
+        expected_result = 200
+
+        result = calc.calculate(input_string)
+
+        self.assertEqual(result, expected_result)
+
+    def testCustomMultiSep(self):
+        input_string = '//[##][@]\n100,20\n30##10@40'
+        expected_result = 200
+
+        result = calc.calculate(input_string)
+
+        self.assertEqual(result, expected_result)
+
+    
         
 if __name__ == '__main__': 
     unittest.main() 
